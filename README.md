@@ -2,6 +2,28 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+### Directory Layout
+
+```bash
+├── public/                        # Static files such as favicon.ico etc.
+├── src/                           # Application source code
+│   ├── admin/                     # Admin section (Dashboard, User Management etc.)
+│   ├── assets/                    # Icon, Images
+│   ├── components/                # Shared React components and HOCs
+│   ├── Pages/                     # Pages (Index, about us, contacts, etc.)
+│   │   ├── Users/                 # User pages (login, account settings, user profile, etc)
+│   │   ├── Admin/                 # Admin Page
+│   ├── utils/                     # Utility functions
+│   │   ├── Firebase.js
+│   ├── index.js                   # Client-side entry point, e.g. ReactDOM.render(<App />,
+│   ├── routes/                    # Universal application router
+│   └── theme.js                   # Overrides for Material UI default styles
+├── .env                           # Environment variables for local development
+├── .env.production                # Environment variables for the production build
+├── .env.test                      # Environment variables for the test build
+└── package.json                   # The list of project dependencies + NPM scripts
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
