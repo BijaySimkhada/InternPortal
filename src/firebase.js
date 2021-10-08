@@ -7,29 +7,15 @@ const firebaseConfig = {
   storageBucket: "internportal-83cb2.appspot.com",
   messagingSenderId: "696144772473",
   appId: "1:696144772473:web:6ff8a0bbb469206ab1c3a8",
-  measurementId: "G-F3PG10XY6D"
+  measurementId: "G-F3PG10XY6D",
 };
-
 
 const app = firebase.initializeApp(firebaseConfig);
 const auth = app.auth();
 const db = app.firestore();
 
-
-
-
-
-
 export const logout = () => {
-
   auth.signOut();
-
-
 };
 
-export {
-  app,
-  auth,
-  db,
- 
-};
+export { app, auth, db };

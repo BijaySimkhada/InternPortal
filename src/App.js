@@ -1,17 +1,16 @@
-
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./Pages/User/Login";
 import Register from "./Pages/User/Register";
 import Reset from "./Pages/User/Reset";
 import Dashboard from "./admin/Dashboard";
 import Homepage from "./components/landing/Homepage";
-import Userdashboard from './admin/Userdashboard'
-import Admindashboard from './admin/Admindashboard'
+import Userdashboard from "./admin/Userdashboard";
+import Admindashboard from "./admin/Admindashboard";
+import UserDetail from "./Pages/Admin/UserDetail";
+import EditForm from "./Pages/Admin/EditForm";
 
 function App() {
   return (
-
-
     <div className="app">
       <Router>
         <Switch>
@@ -23,6 +22,8 @@ function App() {
           <Route exact path="/Userdashboard" component={Userdashboard} />
           <Route exact path="/Admindashboard" component={Admindashboard} />
 
+          <Route exact path="/user/:id" component={UserDetail} />
+          <Route exact path="/userForm/:id?" component={EditForm} />
         </Switch>
       </Router>
     </div>

@@ -5,7 +5,6 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import "./Login.css";
 import Navbar from "../../components/navbar/Navbar";
 
-
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,7 +21,7 @@ function Login() {
   }, [user, loading]);
   const signInWithEmailAndPassword = async (email, password) => {
     await auth.signInWithEmailAndPassword(email, password);
-    
+
     return history.replace("/dashboard");
   };
 
