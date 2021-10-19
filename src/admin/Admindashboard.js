@@ -57,27 +57,11 @@ const Admindashboard = ({ name, user, image }) => {
               <img src={image} height="200" width="100" alt="" />
               <button className="login__btn" onClick={logout}>
                 {" "}
-                Admmin Logout{" "}
+                Admin Logout{" "}
               </button>
             </li>
 
-            <li>
-              <a href="/login">
-                <svg>
-                  <use href="/login"></use>
-                </svg>
-                <span>Users</span>
-              </a>
-            </li>
-            <li>
-              <a href="#0">
-                <svg>
-                  <use href="#trends"></use>
-                </svg>
-                <span>Trends</span>
-              </a>
-            </li>
-            <li>
+                       <li>
               <a href="/reset">
                 <svg>
                   <use htmlhref="#reset"></use>
@@ -103,20 +87,16 @@ const Admindashboard = ({ name, user, image }) => {
         </section>
         <div className="">
           <h1>ALL users</h1>
-          <p>users:</p>
+         
           <div className="">
-            <h1>This is index Page</h1>
-            <a className="" href="!#" onClick={() => firebase.logout()}>
-              Logout
-            </a>
+           
+          
             {users.map((user) => {
               return (
                 <div className="app" key={user.id}>
                   <h4>Name : {user.name}</h4>
                   <p>Email: {user.email}</p>
-                  <b>id: {user.id}</b>
-
-                  <Link to={`/user/${user.id}`}> View Details</Link>
+              <Link to={`/user/${user.id}`}> View Details</Link>
                   <button onClick={() => deleteUser(user.id)}>
                     Delete User
                   </button>

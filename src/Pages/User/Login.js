@@ -27,9 +27,10 @@ function Login() {
 
   return (
     <>
-      <Navbar />
+     
       <div className="login">
         <div className="login__container">
+        <Link to="/">X</Link>
           <input
             type="text"
             className="login__textBox"
