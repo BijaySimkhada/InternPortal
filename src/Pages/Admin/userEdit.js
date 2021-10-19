@@ -13,10 +13,11 @@ function EditForm() {
   const [user, setuser] = useState({
     name: "",
     email: "",
-    
+    location: "",
     website: "",
     post: "",
     isAdmin: false,
+    
     isVerified:false,
   });
 
@@ -65,8 +66,9 @@ function EditForm() {
     history.push("/dashboard");
   };
   return (
+      
     <div className="container">
-  
+ 
       <form onSubmit={submitForm}>
         <div>
           <div>
@@ -113,17 +115,7 @@ function EditForm() {
               onChange={oninputChange}
             />
           </div>
-         IsAdmin?: <select name="isAdmin" id="isAdmin" value={user.isAdmin} onChange={oninputChange}>
-            <option value={true}>true</option>
-              <option value={false}>false</option>
-            
-                    </select>
-                    <br/>
-                    IsVerified?: <select name="isVerified" id="isVerified" value={user.isVerified} onChange={oninputChange}>
-            <option value={true}>true</option>
-              <option value={false}>false</option>
-            
-                    </select>
+       
         </div>
 
         <button type="submit">{id ? "Update user" : "Add user"}</button>

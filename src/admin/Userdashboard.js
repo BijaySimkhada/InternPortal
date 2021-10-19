@@ -3,9 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import "./Userdashboard.css";
 import { logout } from "../firebase";
 import { useFirestore } from "react-redux-firebase";
-
 import { useSelector } from "react-redux";
-
 import { isLoaded } from "react-redux-firebase";
 
 function AuthIsLoaded({ children }) {
@@ -37,25 +35,40 @@ function Userdashboard() {
 
   const submitForm = async (e) => {
     e.preventDefault();
-    const postName = e.target.postName.value;
-    const email = e.target.email.value;
+    const title = e.target.title.value;
+    const job_type = e.target.job_type.value;
+    const job_level = e.target.job_level.value;
+    const city = e.target.city.value;
+    const experience = e.target.experience.value;
+    const skills = e.target.skills.value;
+    const education = e.target.education.value;
+    const apply_before = e.target.apply_before.value;
     var index = 0;
+    
     // console.log("post name: " + postName);
     // update user
     try {
       await firestore
         .collection("users")
         .doc(user.uid)
-        .update({
+        .set({
           post101: [
             {
               id: index,
-              postName: postName,
-              email: email,
+              title: title,
+              job_type: job_type,
+              job_level:job_level,
+              city: city,
+              education:education,
+              experience: experience,
+              skills: skills,
+              apply_before: apply_before,
+             
             },
           ],
-        })
+        },{ merge : true })
         .then(() => console.log("Document successfully written!"), index++)
+
         .catch((err) => console.log(err.message()));
     } catch (error) {
       console.error("Error updating document: ", error);
@@ -69,7 +82,7 @@ function Userdashboard() {
       <AuthIsLoaded>
         <header className="page-header">
           <nav>
-            <a href="/dashboardq" aria-label="forecastr logo" className="logo">
+            <a href="/dashboard" aria-label="forecastr logo" className="logo">
               <svg width="140" height="49"></svg>
             </a>
             <button
@@ -83,28 +96,14 @@ function Userdashboard() {
             </button>
             <ul className="admin-menu">
               <li className="">
-                <h3>User Dashboard</h3>
+                <h3>User Dashboard User:{user.name}</h3>
+                <img src={user.image} height="200" width="100" alt="" />
                 <button className="" onClick={logout}>
                   LOGOUT
                 </button>
               </li>
 
-              <li>
-                <a href="/login">
-                  <svg>
-                    <use href="/login"></use>
-                  </svg>
-                  <span>Users</span>
-                </a>
-              </li>
-              <li>
-                <a href="#0">
-                  <svg>
-                    <use href="#trends"></use>
-                  </svg>
-                  <span>Trends</span>
-                </a>
-              </li>
+             
               <li>
                 <a href="/reset">
                   <svg>
@@ -121,16 +120,12 @@ function Userdashboard() {
             <div className="admin-profile">
               <h1>Welcome {user.name}</h1>
               <h4>Email: {user.email}</h4>
-              <h4>uid: {user.uid}</h4>
+             
               <h4>contact: {user.contact}</h4>
               <h4>website: {user.website}</h4>
-              <h4>image:</h4>{" "}
-              <img
-                aria-label="forecastr logo"
-                className="logo"
-                src={user.image}
-              />
-              <Link to={`/userForm/${user.uid}`}>edit profile</Link>
+             
+         
+              <Link to={`/userEdit/${user.uid}`}>edit profile</Link>
             </div>
           </section>
           <section>
@@ -140,39 +135,66 @@ function Userdashboard() {
               <form onSubmit={submitForm}>
                 <div>
                   <div>
-                    <input placeholder="Enter user Name" name="postName" />
+                    Job title:<input placeholder="Enter Post Title" name="title" />
                   </div>
-                  <div>
-                    <input placeholder="Enter user E-mail" name="email" />
-                  </div>
+                 Job Type: <select name="job_type" id="job_type">
+            <option value="frontend">frontend</option>
+              <option value="backend">backend</option>
+              <option value="fullstack">fullstack</option>
+    
+                    </select>
+                   
                 </div>
-                {/* <div>
+                Job Level: <select name="job_level" id="job_level">
+            <option value="beginner">beginner</option>
+              <option value="intermediate">intermediate</option>
+              <option value="senior">senior</option>
+    
+                    </select>
+                <div>
                   <div>
-                    <input placeholder="Enter Location" name="location" />
+                  City:  <input placeholder="City" name="city" />
                   </div>
                 </div>
                 <div className="form-row form-group">
                   <div>
-                    <input placeholder="Enter website" name="website" />
+                   Education Qualification: <input placeholder="Education Qualification" name="education" />
                   </div>
                   <div>
-                    <input placeholder="Enter post" name="address" />
+                  Job Experience: <input placeholder="Experience Required" name="experience" />
                   </div>
-                </div> */}
-
+                </div>
+                <div>
+                  <div>
+                   Skills: <input placeholder="Skills Required" name="skills" />
+                  </div>
+                </div>
+                <div>
+                  <div>
+                   Apply Before: <input type="date" placeholder="Apply Before" name="apply_before" />
+                  </div>
+                </div>
                 <button type="submit">POST</button>
               </form>
             </div>
           </section>
 
           <section>
-            <h1>Display POST</h1>
-            Name:
+            <h1>My Job POST</h1>
+          
             {user.post101 &&
               user.post101.map((link, index) => (
                 <div className="" key={index}>
-                  <li>Name: {link.postName}</li>
-                  <li>Email: {link.email}</li>
+                  <li>Title: {link.title}</li>
+                  <li>City: {link.city}</li>
+                  <li>Job type: {link.job_type}</li>
+                  <li>Job Level: {link.job_level}</li>
+                  <li>Education Qualification: {link.education}</li>
+                  <li>Experience Required: {link.experience}</li>
+                  <li>Skill Required: {link.skills}</li>
+                  <li>Apply Before: {link.apply_before}</li>
+                  
+
                 </div>
               ))}
           </section>

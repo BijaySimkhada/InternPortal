@@ -25,9 +25,11 @@ function Reset() {
 
   return (
     <>
-    <Navbar/>
+    
     <div className="reset">
+      
       <div className="reset__container">
+      <Link to="/">X</Link>
         <input
           type="text"
           className="reset__textBox"

@@ -42,8 +42,8 @@ function Register() {
       location:location,
       website:website,
       password: password,
-      isAdmin: false,
-      isVerified: false,
+      isAdmin: "false",
+      isVerified: "false",
     });
     
     return history.push('/login')
@@ -51,11 +51,12 @@ function Register() {
 
   return (
     <>
-      <Navbar />
-
+ 
+  
       <form onSubmit={onSubmit}>
         <div className="login">
           <div className="login__container">
+          <Link to="/">X</Link>
             <input
               className="register__textBox"
               type="text"

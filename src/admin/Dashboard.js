@@ -40,7 +40,7 @@ function Dashboard() {
     
         <>
         {(() => {
-          if (isAdmin == true) {
+          if (isAdmin == "true") {
             return (
               <>
               
@@ -48,7 +48,7 @@ function Dashboard() {
                 <Admindashboard name={name} isAdmin={isAdmin} image={image} user={user}/>
               </>
             );
-          } else if (isAdmin == false) {
+          } else if (isAdmin == "false") {
             return (
               <>
                <Userdashboard name={name} isAdmin={isAdmin} image={image} user={user}/>
