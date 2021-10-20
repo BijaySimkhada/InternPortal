@@ -3,11 +3,14 @@ import React from 'react'
 function Navbar() {
     return (
         <div>
-            <ul>
-                <li><a href="/">Home</a> </li>
-                <li><a href="/login">Login</a> </li>
-               
-            </ul>
+
+            <a href="/">Home</a>
+
+            <a href="/jobs">Jobs</a>
+            <a href="/roadmap">Roadmap</a>
+            <a href="/login">Login</a>
+
+    
         </div>
     )
 }

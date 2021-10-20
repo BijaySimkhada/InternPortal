@@ -26,7 +26,7 @@ function Register() {
     const location = e.target.location.value;
     const website = e.target.website.value;
     const password = e.target.password.value;
-  
+
     const res = await auth.createUserWithEmailAndPassword(email, password);
     const user = res.user;
 
@@ -38,25 +38,25 @@ function Register() {
       name: name,
       image: fileUrl,
       email: email,
-      contact:contact,
-      location:location,
-      website:website,
+      contact: contact,
+      location: location,
+      website: website,
       password: password,
       isAdmin: "false",
       isVerified: "false",
     });
-    
+
     return history.push('/login')
   };
 
   return (
     <>
- 
-  
+
+
       <form onSubmit={onSubmit}>
         <div className="login">
           <div className="login__container">
-          <Link to="/">X</Link>
+            <Link to="/">X</Link>
             <input
               className="register__textBox"
               type="text"
@@ -81,13 +81,13 @@ function Register() {
               name="contact"
               placeholder="contact"
             />
-                <input
+            <input
               className="register__textBox"
               type="text"
               name="location"
               placeholder="location"
             />
-             <input
+            <input
               className="register__textBox"
               type="text"
               name="website"
