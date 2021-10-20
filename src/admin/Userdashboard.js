@@ -138,17 +138,17 @@ function Userdashboard() {
                     Job title:<input placeholder="Enter Post Title" name="title" />
                   </div>
                  Job Type: <select name="job_type" id="job_type">
-            <option value="frontend">frontend</option>
-              <option value="backend">backend</option>
-              <option value="fullstack">fullstack</option>
+            <option value="frontend">Frontend</option>
+              <option value="backend">Backend</option>
+              <option value="fullstack">Fullstack</option>
     
                     </select>
                    
                 </div>
                 Job Level: <select name="job_level" id="job_level">
-            <option value="beginner">beginner</option>
-              <option value="intermediate">intermediate</option>
-              <option value="senior">senior</option>
+            <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="expert">Expert</option>
     
                     </select>
                 <div>

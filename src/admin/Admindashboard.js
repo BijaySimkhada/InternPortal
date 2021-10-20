@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Userdashboard.css";
-import { auth, db, logout } from "../firebase";
+import { db, app,logout } from "../firebase";
 
 import { useFirestoreConnect, useFirestore } from "react-redux-firebase";
 import { useSelector } from "react-redux";
 
 import { useFirebase } from "react-redux-firebase";
 
-const Admindashboard = ({ name, user, image }) => {
+const Admindashboard = ({ name, image }) => {
   const firestore = useFirestore();
 
   const firebase = useFirebase();
 
   const users = useSelector((state) => state.firestore.ordered.users);
-  console.log(users);
+  
+  const [fileUrl, setFileUrl] = useState(); //for roadmap image
+
 
   useFirestoreConnect([
     {
@@ -34,6 +36,30 @@ const Admindashboard = ({ name, user, image }) => {
       console.error("Error removing document: ", error);
     }
   };
+  const onFileChange = async (e) => {
+    
+    const file = e.target.files[0];
+    const storageRef = app.storage().ref();
+    const fileRef = storageRef.child(file.name);
+    await fileRef.put(file);
+    setFileUrl(await fileRef.getDownloadURL());
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const title = e.target.title.value;
+   
+
+    if (!title || !fileUrl) {
+      return;
+    }
+    await db.collection("roadmaps").doc().set({
+      image: fileUrl,
+      title: title,
+     });
+    
+  };
+
 
   return (
     <>
@@ -106,9 +132,32 @@ const Admindashboard = ({ name, user, image }) => {
           </div>
         </div>
 
-        <footer className="page-footer">
-          {/* <a href="https://georgemartsoukos.com/" target="_blank"></a> */}
-        </footer>
+       <h1>Publish Roadmap</h1>
+       <form onSubmit={onSubmit}>
+        <div>
+          <div>
+       
+            <input
+              
+              type="text"
+              name="title"
+              placeholder="title"
+            />
+            <h5>Upload roadmap</h5>
+            <input
+             
+              type="file"
+              onChange={onFileChange}
+            />
+            
+            <button>Publish</button>
+
+            
+          </div>
+        </div>
+      </form>
+  
+ 
       </section>
     </>
   );
