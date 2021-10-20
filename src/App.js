@@ -13,6 +13,8 @@ import UserDetail from "./Pages/Admin/UserDetail";
 import EditForm from "./Pages/Admin/EditForm";
 import userEdit from "./Pages/Admin/userEdit";
 
+import JobDetail from "./Pages/JobDetail";
+
 function App() {
   return (
     <div className="app">
@@ -26,6 +28,9 @@ function App() {
           <Route exact path="/Userdashboard" component={Userdashboard} />
           <Route exact path="/Admindashboard" component={Admindashboard} />
           <Route exact path="/user/:id" component={UserDetail} />
+
+          <Route exact path="/job/:id" component={JobDetail} />
+
           <Route exact path="/roadmap" component={Roadmaps} />
           <Route exact path="/jobs" component={Jobs} />
           <Route exact path="/userForm/:id?" component={EditForm} />
