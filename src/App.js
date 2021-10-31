@@ -6,7 +6,6 @@ import Dashboard from "./admin/Dashboard";
 import Homepage from "./components/landing/Homepage";
 import Roadmaps from "./Pages/Roadmaps";
 import Jobs from "./Pages/Jobs";
-
 import Userdashboard from "./admin/Userdashboard";
 import Admindashboard from "./admin/Admindashboard";
 import UserDetail from "./Pages/Admin/UserDetail";
@@ -16,29 +15,37 @@ import userEdit from "./Pages/Admin/userEdit";
 import JobDetail from "./Pages/JobDetail";
 
 function App() {
-  return (
-    <div className="app">
-      <Router>
-        <Switch>
-          <Route exact path="/" component={Homepage} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/reset" component={Reset} />
-          <Route exact path="/dashboard" component={Dashboard} />
-          <Route exact path="/Userdashboard" component={Userdashboard} />
-          <Route exact path="/Admindashboard" component={Admindashboard} />
-          <Route exact path="/user/:id" component={UserDetail} />
+    const Error = () => {
+        return (
+            <>
+                <h1>Oops!! Page Not Found</h1>;
+            </>
+        );
+    };
+    return (
+        <div className="app">
+            <Router>
+                <Switch>
+                    <Route exact path="/" component={Homepage} />
+                    <Route path="/login" component={Login} />
+                    <Route path="/register" component={Register} />
+                    <Route path="/reset" component={Reset} />
+                    <Route path="/dashboard" component={Dashboard} />
+                    <Route path="/Userdashboard" component={Userdashboard} />
+                    <Route path="/Admindashboard" component={Admindashboard} />
+                    <Route path="/user/:id" component={UserDetail} />
 
-          <Route exact path="/job/:id" component={JobDetail} />
+                    <Route path="/job/:id?" component={JobDetail} />
 
-          <Route exact path="/roadmap" component={Roadmaps} />
-          <Route exact path="/jobs" component={Jobs} />
-          <Route exact path="/userForm/:id?" component={EditForm} />
-          <Route exact path="/userEdit/:id?" component={userEdit} />
-        </Switch>
-      </Router>
-    </div>
-  );
+                    <Route path="/roadmap" component={Roadmaps} />
+                    <Route path="/jobs" component={Jobs} />
+                    <Route path="/userForm/:id?" component={EditForm} />
+                    <Route path="/userEdit/:id?" component={userEdit} />
+                    <Route component={Error} />
+                </Switch>
+            </Router>
+        </div>
+    );
 }
 
 export default App;

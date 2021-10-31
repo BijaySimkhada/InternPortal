@@ -9,14 +9,14 @@ import { store, rrfProps } from "./redux/store";
 import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <ReactReduxFirebaseProvider {...rrfProps}>
-        <App />
-      </ReactReduxFirebaseProvider>
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById("root")
+    <React.StrictMode>
+        <Provider store={store}>
+            <ReactReduxFirebaseProvider {...rrfProps}>
+                <App />
+            </ReactReduxFirebaseProvider>
+        </Provider>
+    </React.StrictMode>,
+    document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

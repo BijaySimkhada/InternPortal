@@ -1,58 +1,118 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-
+import { db } from "../firebase";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import { useFirestore } from "react-redux-firebase";
 import { useEffect } from "react";
+import Navbar from "../components/navbar/Navbar";
+import Loading from "../components/navbar/Loading";
 
 function UserDetail() {
-  const [user, setUser] = useState(null);
-  const { id } = useParams();
-  const firestore = useFirestore();
+    const [user, setUser] = useState(null);
+    const { id } = useParams();
+    const firestore = useFirestore();
+    const [loading, setLoading] = useState(true);
 
-  const loadUser = async () => {
-    try {
-      const docRef = firestore.collection("users").doc(id);
+    const loadUser = async () => {
+        setLoading(true);
+        db.collection("users")
+            .where("isVerified", "==", "true")
 
-      const result = await docRef.get();
+            .get()
+            .then((querySnapshot) => {
+                const data = querySnapshot.docs.map((doc) => doc.data());
 
-      if (result.exists) {
-        setUser(result.data());
-      } else {
-        console.log("NO such User");
-      }
-    } catch (error) {
-      console.log("Ërror: ", error.message());
-    }
-  };
-  useEffect(() => {
-    loadUser();
-  }, []);
-  if (!user) {
-    return <h1>Loading</h1>;
-  }
-  return (
-    <div className="">
-      <h1>JOB DETAILSSSS</h1>
+                setUser(data);
 
-      <section>
-        {user.post101 &&
-          user.post101.map((link, index) => (
-            <div className="" key={index}>
-              <li>Title: {link.title}</li>
-              <li>City: {link.city}</li>
-              <li>Job type: {link.job_type}</li>
-              <li>Job Level: {link.job_level}</li>
-              <li>Education Qualification: {link.education}</li>
-              <li>Experience Required: {link.experience}</li>
-              <li>Skill Required: {link.skills}</li>
-              <li>Apply Before: {link.apply_before}</li>
-            </div>
-          ))}
-      </section>
+                setTimeout(() => {
+                    setLoading(false);
+                }, 300);
+            })
 
-      {/* <Link to={`/userForm/${id}`}>edit profile</Link> */}
-    </div>
-  );
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
+    };
+    useEffect(() => {
+        loadUser();
+    }, []);
+    if (loading)
+        return (
+            <main>
+                <Loading />
+            </main>
+        );
+    return (
+        <div className="">
+            <Navbar />
+
+            <center>
+                <section>
+                    {user &&
+                        user.map((users, index) => {
+                            return (
+                                <div key={index}>
+                                    {users.post101
+                                        .filter((val) => {
+                                            if (val.id == id) {
+                                                return val;
+                                            }
+                                        })
+
+                                        .map((val) => (
+                                            <div>
+                                                <h1>Title: {val.title}</h1>
+                                                <LazyLoadImage
+                                                    src={users.image}
+                                                    height="200px"
+                                                    width="200px"
+                                                    effect="blur"
+                                                />
+                                                <p>Company Name:{users.name}</p>
+
+                                                <p>Location:{users.location}</p>
+
+                                                <h3>City: {val.city}</h3>
+                                                <h3>
+                                                    Job type: {val.job_type}
+                                                </h3>
+                                                <h3>
+                                                    Job Level: {val.job_level}
+                                                </h3>
+                                                <h3>
+                                                    Education Qualification:{" "}
+                                                    {val.education}
+                                                </h3>
+                                                <h3>
+                                                    Experience Required:{" "}
+                                                    {val.experience}
+                                                </h3>
+                                                <h3>
+                                                    Skill Required: {val.skills}
+                                                </h3>
+                                                <h3>
+                                                    Website: {users.website}
+                                                </h3>
+
+                                                <h3>
+                                                    Apply Before:{" "}
+                                                    {val.apply_before}
+                                                </h3>
+
+                                                <h3>
+                                                    Send your CV At: http://
+                                                    {users.email}
+                                                </h3>
+                                            </div>
+                                        ))}
+                                </div>
+                            );
+                        })}
+                </section>
+            </center>
+        </div>
+    );
 }
 
 export default UserDetail;
