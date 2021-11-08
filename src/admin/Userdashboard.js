@@ -77,6 +77,20 @@ function Userdashboard() {
 
         history.push("/dashboard");
     };
+    const deletePost = (post) => {
+        try {
+            firestore
+                .collection("users")
+                .doc(user.uid)
+                .update({
+                    post101: firestore.FieldValue.arrayRemove(post),
+                })
+                 .then(() => alert("Post Deleted"))
+                })
+
+                .catch((err) => console.log(err.message()));
+        } catch (error) {}
+    };
 
     return (
         <>
@@ -236,6 +250,11 @@ function Userdashboard() {
                                         <li>
                                             Apply Before: {post.apply_before}
                                         </li>
+                                         <button
+                                            onClick={() => deletePost(post)}
+                                        >
+                                            Delete Post
+                                        </button>
                                     </div>
                                 ))}
                         </div>
