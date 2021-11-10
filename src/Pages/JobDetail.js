@@ -7,11 +7,17 @@ import { useFirestore } from "react-redux-firebase";
 import { useEffect } from "react";
 import Navbar from "../components/navbar/Navbar";
 import Loading from "../components/navbar/Loading";
+import TimeAgo from "javascript-time-ago";
+import ReactTimeAgo from "react-time-ago";
+
+import en from "javascript-time-ago/locale/en.json";
+
+TimeAgo.addDefaultLocale(en);
 
 function UserDetail() {
     const [user, setUser] = useState(null);
     const { id } = useParams();
-    const firestore = useFirestore();
+
     const [loading, setLoading] = useState(true);
 
     const loadUser = async () => {
@@ -62,7 +68,13 @@ function UserDetail() {
 
                                         .map((val) => (
                                             <div>
-                                                <h1>Title: {val.title}</h1>
+                                                <h1>
+                                                    Title: {val.title}{" "}
+                                                    <ReactTimeAgo
+                                                        date={val.created_at.toDate()}
+                                                        locale="en-US"
+                                                    />
+                                                </h1>
                                                 <LazyLoadImage
                                                     src={users.image}
                                                     height="200px"
@@ -77,16 +89,14 @@ function UserDetail() {
                                                 <h3>
                                                     Job type: {val.job_type}
                                                 </h3>
-                                                <h3>
-                                                    Job Level: {val.job_level}
-                                                </h3>
+
                                                 <h3>
                                                     Education Qualification:{" "}
                                                     {val.education}
                                                 </h3>
                                                 <h3>
-                                                    Experience Required:{" "}
-                                                    {val.experience}
+                                                    Total Positions:
+                                                    {val.total_positions}
                                                 </h3>
                                                 <h3>
                                                     Skill Required: {val.skills}

@@ -62,12 +62,12 @@ function Roadmaps() {
                 })
                 .map((val, key) => {
                     return (
-                        <div>
+                        <div key={key}>
                             <>
                                 <h1>{val.title}</h1>
                                 <LazyLoadImage
-                                    height="1000px"
-                                    width="700px"
+                                    height="700px"
+                                    width="100%"
                                     effect="blur"
                                     src={val.image}
                                 />

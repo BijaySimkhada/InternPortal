@@ -40,25 +40,66 @@ function UserDetail() {
                 <Loading />
             </main>
         );
-    return (
-        <div className="">
-            <h1>User Detail</h1>
-            <h4>User Name : {user.name}</h4>
-            <LazyLoadImage
-                src={user.image}
-                height="200"
-                width="100"
-                alt=""
-                loading="lazy"
-                effect="blur"
-            />
-            <h4>Email : {user.email}</h4>
-            <h4>Address : {user.location}</h4>
-            <h4>Phone : {user.contact}</h4>
-            <h4>website : {user.website}</h4>
+    const deletePost = (post) => {
+        try {
+            firestore
+                .collection("users")
+                .doc(user.uid)
+                .update({
+                    post101: firestore.FieldValue.arrayRemove(post),
+                })
+                .then(() => {})
 
-            <Link to={`/userForm/${id}`}>edit profile</Link>
-        </div>
+                .catch((err) => console.log(err.message()));
+        } catch (error) {}
+    };
+
+    return (
+        <>
+            <div className="">
+                <h1>User Detail</h1>
+                <h4>User Name : {user.name}</h4>
+                <LazyLoadImage
+                    src={user.image}
+                    height="500px"
+                    width="400px"
+                    effect="blur"
+                    alt=""
+                    effect="blur"
+                />
+                <h4>Email : {user.email}</h4>
+                <h4>Address : {user.location}</h4>
+                <h4>Phone : {user.contact}</h4>
+                <h4>website : {user.website}</h4>
+
+                <Link to={`/userForm/${id}`}>edit profile</Link>
+            </div>
+            <section>
+                <h1>{user.name}'s POST</h1>
+                <div>
+                    {user.post101 &&
+                        user.post101.map((post) => (
+                            <div className="" key={post.id}>
+                                <h1>Title: {post.title}</h1>
+
+                                <li>City: {post.city}</li>
+                                <li>Job type: {post.job_type}</li>
+                                <li>Total Positions: {post.total_positions}</li>
+                                <li>
+                                    Education Qualification: {post.education}
+                                </li>
+                                <li>Experience Required: {post.experience}</li>
+                                <li>Skill Required: {post.skills}</li>
+                                <li>Apply Before: {post.apply_before}</li>
+
+                                <button onClick={() => deletePost(post)}>
+                                    Delete Post
+                                </button>
+                            </div>
+                        ))}
+                </div>
+            </section>
+        </>
     );
 }
 

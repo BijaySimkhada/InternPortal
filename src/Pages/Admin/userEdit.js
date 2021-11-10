@@ -113,14 +113,6 @@ function EditForm() {
                             onChange={oninputChange}
                         />
                     </div>
-                    <div>
-                        <input
-                            placeholder="Enter post"
-                            name="post"
-                            value={user.post}
-                            onChange={oninputChange}
-                        />
-                    </div>
                 </div>
 
                 <button type="submit">{id ? "Update user" : "Add user"}</button>

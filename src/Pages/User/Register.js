@@ -63,30 +63,35 @@ function Register() {
                             type="text"
                             name="name"
                             placeholder="full name"
+                            required
                         />
                         <h5>Upload logo</h5>
                         <input
                             className="register__textBox"
                             type="file"
                             onChange={onFileChange}
+                            required
                         />
                         <input
                             className="register__textBox"
                             type="text"
                             name="email"
                             placeholder="email"
+                            required
                         />
                         <input
                             className="register__textBox"
                             type="text"
                             name="contact"
                             placeholder="contact"
+                            required
                         />
                         <input
                             className="register__textBox"
                             type="text"
                             name="location"
                             placeholder="location"
+                            required
                         />
                         <input
                             className="register__textBox"
@@ -99,6 +104,7 @@ function Register() {
                             type="password"
                             name="password"
                             placeholder="password"
+                            required
                         />
                         <button className="register__btn">Register</button>
 

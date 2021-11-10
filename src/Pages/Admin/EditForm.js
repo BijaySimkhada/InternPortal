@@ -112,14 +112,6 @@ function EditForm() {
                             onChange={oninputChange}
                         />
                     </div>
-                    <div>
-                        <input
-                            placeholder="Enter post"
-                            name="post"
-                            value={user.post}
-                            onChange={oninputChange}
-                        />
-                    </div>
                     IsAdmin?:{" "}
                     <select
                         name="isAdmin"

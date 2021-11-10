@@ -5,6 +5,12 @@ import { Link } from "react-router-dom";
 import Loading from "../components/navbar/Loading";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import TimeAgo from "javascript-time-ago";
+import ReactTimeAgo from "react-time-ago";
+
+import en from "javascript-time-ago/locale/en.json";
+
+TimeAgo.addDefaultLocale(en);
 
 function Jobs() {
     const [data, setData] = useState([]);
@@ -64,7 +70,7 @@ function Jobs() {
             {data &&
                 data.map((users, index) => {
                     return (
-                        <div key={index}>
+                        <div>
                             {users.post101
                                 .filter((val) => {
                                     if (searchTerm == "") {
@@ -73,19 +79,18 @@ function Jobs() {
                                         val.job_type
                                             .toLowerCase()
                                             .includes(searchTerm.toLowerCase())
-                                    ) {
+                                    )
                                         return val;
-                                    } else if (
+                                    else if (
                                         val.title
                                             .toLowerCase()
                                             .includes(searchTerm.toLowerCase())
-                                    ) {
+                                    )
                                         return val;
-                                    }
                                 })
 
-                                .map((post) => (
-                                    <div>
+                                .map((post, index) => (
+                                    <div key={index}>
                                         <LazyLoadImage
                                             src={users.image}
                                             height="500px"
@@ -96,7 +101,10 @@ function Jobs() {
                                         <p>{users.name}</p>
                                         <p>{users.location}</p>
                                         <p>{post.apply_before}</p>
-
+                                        <ReactTimeAgo
+                                            date={post.created_at.toDate()}
+                                            locale="en-US"
+                                        />
                                         <Link to={`/job/${post.id}`}>
                                             View Details
                                         </Link>

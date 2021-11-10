@@ -11,8 +11,6 @@ import { useFirebase } from "react-redux-firebase";
 const Admindashboard = ({ name, image }) => {
     const firestore = useFirestore();
 
-    const firebase = useFirebase();
-
     const users = useSelector((state) => state.firestore.ordered.users);
 
     const [fileUrl, setFileUrl] = useState(); //for roadmap image
