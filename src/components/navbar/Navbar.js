@@ -26,6 +26,12 @@ function Navbar() {
                         <Link to="/roadmap" className="abs">
                             Roadmap
                         </Link>
+                        <Link to="/about" className="abs">
+                            About
+                        </Link>
+                        <Link to="/contact" className="abs">
+                            Contact
+                        </Link>
                         <p className="abs">Hello, {users.name}</p>
                         <button className="abs" onClick={logout}>
                             Logout
@@ -48,6 +54,12 @@ function Navbar() {
                     </Link>
                     <Link to="/roadmap" className="abs">
                         Roadmap
+                    </Link>
+                    <Link to="/about" className="abs">
+                        About
+                    </Link>
+                    <Link to="/contact" className="abs">
+                        Contact
                     </Link>
                     <Link to="/login" className="abs">
                         Login

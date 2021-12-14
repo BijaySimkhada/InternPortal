@@ -11,9 +11,9 @@ import Admindashboard from "./admin/Admindashboard";
 import UserDetail from "./Pages/Admin/UserDetail";
 import EditForm from "./Pages/Admin/EditForm";
 import userEdit from "./Pages/Admin/userEdit";
-
+import About from "./Pages/About";
 import JobDetail from "./Pages/JobDetail";
-
+import Contact from "./Pages/Contact";
 function App() {
     const Error = () => {
         return (
@@ -36,7 +36,8 @@ function App() {
                     <Route path="/user/:id" component={UserDetail} />
 
                     <Route path="/job/:id?" component={JobDetail} />
-
+                    <Route path="/about" component={About} />
+                    <Route path="/contact" component={Contact} />
                     <Route path="/roadmap" component={Roadmaps} />
                     <Route path="/jobs" component={Jobs} />
                     <Route path="/userForm/:id?" component={EditForm} />

@@ -3,7 +3,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { useFirestore } from "react-redux-firebase";
 import { Link } from "react-router-dom";
 import Loading from "../../components/navbar/Loading";
-
+import "../../CSS/Userdashboard.css";
 function EditForm() {
     const firestore = useFirestore();
 
@@ -73,45 +73,38 @@ function EditForm() {
         history.push("/dashboard");
     };
     return (
-        <div className="container">
-            <form onSubmit={submitForm}>
-                <div>
-                    <div>
-                        <input
-                            placeholder="Enter user Name"
-                            name="name"
-                            value={user.name}
-                            onChange={oninputChange}
-                        />
-                    </div>
-                    <div>
-                        <input
-                            placeholder="Enter user E-mail"
-                            name="email"
-                            value={user.email}
-                            onChange={oninputChange}
-                        />
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <input
-                            placeholder="Enter Location"
-                            name="location"
-                            value={user.location}
-                            onChange={oninputChange}
-                        />
-                    </div>
-                </div>
-                <div className="form-row form-group">
-                    <div>
-                        <input
-                            placeholder="Enter website"
-                            name="website"
-                            value={user.website}
-                            onChange={oninputChange}
-                        />
-                    </div>
+        <div className="join-reg-container">
+            <div className="join-reg">
+                <form onSubmit={submitForm}>
+                    <h2>Update {user.name}'s Profile</h2>
+                    <input
+                        type="text"
+                        placeholder="Enter user Name"
+                        name="name"
+                        value={user.name}
+                        onChange={oninputChange}
+                    />
+                    <input
+                        type="text"
+                        placeholder="Enter user E-mail"
+                        name="email"
+                        value={user.email}
+                        onChange={oninputChange}
+                    />
+                    <input
+                        type="text"
+                        placeholder="Enter Location"
+                        name="location"
+                        value={user.location}
+                        onChange={oninputChange}
+                    />
+                    <input
+                        type="text"
+                        placeholder="Enter website"
+                        name="website"
+                        value={user.website}
+                        onChange={oninputChange}
+                    />
                     IsAdmin?:{" "}
                     <select
                         name="isAdmin"
@@ -133,10 +126,9 @@ function EditForm() {
                         <option value={true}>true</option>
                         <option value={false}>false</option>
                     </select>
-                </div>
-
-                <button type="submit">{id ? "Update user" : "Add user"}</button>
-            </form>
+                    <input type="submit" name="submit" value="Update" />
+                </form>
+            </div>
         </div>
     );
 }

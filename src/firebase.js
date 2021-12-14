@@ -3,6 +3,7 @@ import firebase from "firebase";
 const firebaseConfig = {
     apiKey: "AIzaSyDG8v1_2ZXigOFkwxLv_ra9Z9iNuKdCM1g",
     authDomain: "internportal-83cb2.firebaseapp.com",
+    databaseURL: "https://internportal-83cb2-default-rtdb.firebaseio.com",
     projectId: "internportal-83cb2",
     storageBucket: "internportal-83cb2.appspot.com",
     messagingSenderId: "696144772473",

@@ -54,67 +54,78 @@ function Register() {
 
     return (
         <>
-            <form onSubmit={onSubmit}>
-                <div className="login">
-                    <div className="login__container">
-                        <Link to="/">X</Link>
-                        <input
-                            className="register__textBox"
-                            type="text"
-                            name="name"
-                            placeholder="full name"
-                            required
-                        />
-                        <h5>Upload logo</h5>
-                        <input
-                            className="register__textBox"
-                            type="file"
-                            onChange={onFileChange}
-                            required
-                        />
-                        <input
-                            className="register__textBox"
-                            type="text"
-                            name="email"
-                            placeholder="email"
-                            required
-                        />
-                        <input
-                            className="register__textBox"
-                            type="text"
-                            name="contact"
-                            placeholder="contact"
-                            required
-                        />
-                        <input
-                            className="register__textBox"
-                            type="text"
-                            name="location"
-                            placeholder="location"
-                            required
-                        />
-                        <input
-                            className="register__textBox"
-                            type="text"
-                            name="website"
-                            placeholder="website"
-                        />
-                        <input
-                            className="register__textBox"
-                            type="password"
-                            name="password"
-                            placeholder="password"
-                            required
-                        />
-                        <button className="register__btn">Register</button>
-
-                        <div>
-                            Already have an account?{" "}
-                            <Link to="/login">Login</Link> now.
+            <div className="signup-page-container">
+                <div className="signup-container">
+                    <form onSubmit={onSubmit}>
+                        <div className="signup-first-col">
+                            <h3 className="sign-up-header">Sign Up</h3>
+                            <p className="signup-p">
+                                Sign up your company in our site
+                            </p>
+                            <input
+                                type="text"
+                                name="name"
+                                placeholder="company name"
+                                required
+                            />
+                            <input
+                                type="text"
+                                name="contact"
+                                placeholder="contact"
+                                required
+                            />
+                            <input
+                                type="text"
+                                name="website"
+                                placeholder="personal website"
+                                required
+                            />
                         </div>
-                    </div>
+                        <div className="signup-second-col">
+                            <span>
+                                <input
+                                    type="file"
+                                    accept="image/png, image/gif, image/jpeg"
+                                    name="image"
+                                    id="image"
+                                    onChange={onFileChange}
+                                    required
+                                />
+                                <label for="image" id="signup-file-upload-icon">
+                                    <i className="fas fa-plus-circle"></i>
+                                </label>
+                                <label className="file-logo-label">Logo</label>
+                            </span>
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="email"
+                                required
+                            />
+                            <input
+                                type="text"
+                                name="location"
+                                placeholder="location"
+                                required
+                            />
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="password"
+                                required
+                            />
+                            <button className="login__btn">Register</button>
+                        </div>
+                    </form>
+
+                    <span>
+                        <p className="signup-p">
+                            Already have an account?{" "}
+                            <Link to="/login">Sign in</Link>
+                        </p>
+                    </span>
                 </div>
-            </form>
+            </div>
         </>
     );
 }

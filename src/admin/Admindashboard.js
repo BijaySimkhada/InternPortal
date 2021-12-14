@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./Userdashboard.css";
+import "../CSS/Admindashboard.css";
 import { db, app, logout } from "../firebase";
 
 import { useFirestoreConnect, useFirestore } from "react-redux-firebase";
@@ -56,106 +56,98 @@ const Admindashboard = ({ name, image }) => {
 
     return (
         <>
-            <header className="page-header">
-                <nav>
-                    <a
-                        href="/dashboard"
-                        aria-label="forecastr logo"
-                        className="logo"
-                    >
-                        <svg width="140" height="49"></svg>
-                    </a>
-                    <button
-                        className="toggle-mob-menu"
-                        aria-expanded="false"
-                        aria-label="open menu"
-                    >
-                        <svg width="20" height="20" aria-hidden="true">
-                            <use href="#down"></use>
-                        </svg>
-                    </button>
-                    <Link to="/">Go to Homepage</Link>
-                    <ul className="admin-menu">
-                        <li className="menu-heading">
-                            <h3>Admin Dashboard User:{name}</h3>
-                            <img src={image} height="200" width="100" alt="" />
-                            <button className="login__btn" onClick={logout}>
-                                {" "}
-                                Admin Logout{" "}
-                            </button>
-                        </li>
-
-                        <li>
-                            <a href="/reset">
-                                <svg>
-                                    <use htmlhref="#reset"></use>
-                                </svg>
-                                <span>Reset Password</span>
+            <header>
+                <div className="dashboard-container">
+                    <div className="d-flex space-between align-items-center">
+                        <div className="social-links">
+                            <ul className="d-flex" id="socials">
+                                <li>
+                                    <Link to="/dashboard">
+                                        {" "}
+                                        <h1>Admin Dashboard</h1>
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="logo-container">
+                            <a className="logo" href="#">
+                                Welcome,<span>{name}</span>
                             </a>
-                        </li>
-                    </ul>
-                </nav>
-            </header>
-            <section className="page-content">
-                <section className="search-and-user">
-                    <div className="admin-profile">
-                        <span className="greeting">Hello admin</span>
-
-                        <div className="notifications">
-                            <span className="badge">1</span>
-                            <svg>
-                                <use href="#users"></use>
-                            </svg>
+                        </div>
+                        <div className="info">
+                            <ul className="d-flex" id="contacts"></ul>
                         </div>
                     </div>
-                </section>
-                <div className="">
-                    <h1>ALL users</h1>
+                    <nav>
+                        <ul
+                            className="d-flex justify-content-center"
+                            id="option"
+                        >
+                            <li id="list-item">
+                                <Link to="/">Return Homepage</Link>
+                            </li>
 
-                    <div className="">
-                        {users
-                            .filter((val) => {
-                                if (val.isAdmin == "false") {
-                                    return val;
-                                }
-                            })
-                            .map((user) => {
-                                return (
-                                    <div className="app" key={user.id}>
-                                        <h4>Name : {user.name}</h4>
-                                        <p>Email: {user.email}</p>
-                                        <Link to={`/user/${user.id}`}>
-                                            {" "}
-                                            View Details
-                                        </Link>
-                                        <button
-                                            onClick={() => deleteUser(user.id)}
-                                        >
-                                            Delete User
-                                        </button>
-                                    </div>
-                                );
-                            })}
+                            <li id="list-item">
+                                <button onClick={logout}>LOGOUT</button>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+
+            <div class="profile-container">
+                <div class="profile-content">
+                    <div class="profile">
+                        <div class="profile-table">
+                            <div class="column">
+                                {users
+                                    .filter((val) => {
+                                        if (val.isAdmin == "false") {
+                                            return val;
+                                        }
+                                    })
+                                    .map((user) => {
+                                        return (
+                                            <div class="row">
+                                                <div id="th">{user.name}</div>
+                                                <div id="td">
+                                                    <Link
+                                                        to={`/user/${user.id}`}
+                                                    >
+                                                        {" "}
+                                                        View Details
+                                                    </Link>
+                                                </div>
+                                                <div id="td">
+                                                    <button
+                                                        onClick={() =>
+                                                            deleteUser(user.id)
+                                                        }
+                                                    >
+                                                        Delete User
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                            </div>
+                        </div>{" "}
+                    </div>{" "}
+                </div>{" "}
+            </div>
+
+            {/* <h1>Publish Roadmap</h1>
+            <form onSubmit={onSubmit}>
+                <div>
+                    <div>
+                        <input type="text" name="title" placeholder="title" />
+                        <h5>Upload roadmap</h5>
+                        <input type="file" onChange={onFileChange} />
+
+                        <button>Publish</button>
                     </div>
                 </div>
-
-                <h1>Publish Roadmap</h1>
-                <form onSubmit={onSubmit}>
-                    <div>
-                        <div>
-                            <input
-                                type="text"
-                                name="title"
-                                placeholder="title"
-                            />
-                            <h5>Upload roadmap</h5>
-                            <input type="file" onChange={onFileChange} />
-
-                            <button>Publish</button>
-                        </div>
-                    </div>
-                </form>
-            </section>
+            </form>{" "} */}
         </>
     );
 };

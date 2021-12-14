@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import "./Userdashboard.css";
+import "../CSS/Userdashboard.css";
 import { logout } from "../firebase";
 import { useFirestore } from "react-redux-firebase";
 import { useSelector } from "react-redux";
@@ -9,6 +9,7 @@ import TimeAgo from "javascript-time-ago";
 import ReactTimeAgo from "react-time-ago";
 
 import en from "javascript-time-ago/locale/en.json";
+import CVrequest from "./CVrequest";
 
 TimeAgo.addDefaultLocale(en);
 
@@ -121,196 +122,175 @@ function Userdashboard() {
 
     return (
         <>
-            <AuthIsLoaded>
-                <header className="page-header">
+            <header>
+                <div className="dashboard-container">
+                    <div className="d-flex space-between align-items-center">
+                        <div className="social-links">
+                            <ul className="d-flex" id="socials">
+                                <li>
+                                    <Link to="/dashboard">
+                                        {" "}
+                                        <h1>User Dashboard</h1>
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="logo-container">
+                            <a className="logo" href="#">
+                                Welcome,<span>{user.name}</span>
+                            </a>
+                        </div>
+                        <div className="info">
+                            <ul className="d-flex" id="contacts">
+                                <li>
+                                    <i className="fas fa-phone-alt"></i>{" "}
+                                    {user.contact}
+                                </li>
+                                <li>
+                                    <i className="fa fa-envelope"></i>{" "}
+                                    {user.email}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                     <nav>
-                        <a
-                            href="/dashboard"
-                            aria-label="forecastr logo"
-                            className="logo"
+                        <ul
+                            className="d-flex justify-content-center"
+                            id="option"
                         >
-                            <svg width="140" height="49"></svg>
-                        </a>
-                        <button
-                            className="toggle-mob-menu"
-                            aria-expanded="false"
-                            aria-label="open menu"
-                        >
-                            <svg width="20" height="20" aria-hidden="true">
-                                <use href="#down"></use>
-                            </svg>
-                        </button>
-                        <ul className="admin-menu">
-                            <li className="">
-                                <Link to="/">Go to Homepage</Link>
-                                <h3>User Dashboard User:{user.name}</h3>
-                                <img
-                                    src={user.image}
-                                    height="200"
-                                    width="100"
-                                    alt=""
-                                />
-                                <button className="" onClick={logout}>
-                                    LOGOUT
-                                </button>
+                            <li id="list-item">
+                                <Link to="/">Return Homepage</Link>
                             </li>
-
-                            <li>
-                                <a href="/reset">
-                                    <svg>
-                                        <use htmlhref="#rest"></use>
-                                    </svg>
-                                    <span>Reset Password</span>
-                                </a>
+                            <li id="list-item">
+                                <Link to={`/userEdit/${user.uid}`}>
+                                    Edit Profile
+                                </Link>
+                            </li>
+                            <li id="list-item">
+                                <button onClick={logout}>LOGOUT</button>
                             </li>
                         </ul>
                     </nav>
-                </header>
-                <section className="page-content">
-                    <section className="search-and-user">
-                        <div className="admin-profile">
-                            <h1>Welcome {user.name}</h1>
-                            <h4>Email: {user.email}</h4>
-
-                            <h4>contact: {user.contact}</h4>
-                            <h4>website: {user.website}</h4>
-
-                            <Link to={`/userEdit/${user.uid}`}>
-                                edit profile
-                            </Link>
-                        </div>
-                    </section>
-                    <section>
-                        <h1>CREATE a POST</h1>
-
-                        <div className="container">
-                            <form onSubmit={submitForm}>
-                                <div>
-                                    <div>
-                                        Job title:
-                                        <input
-                                            placeholder="Enter Post Title"
-                                            name="title"
-                                            required
-                                        />
-                                    </div>
-                                    Job Type:{" "}
-                                    <select
-                                        name="job_type"
-                                        id="job_type"
-                                        required
-                                    >
-                                        <option value="frontend">
-                                            Frontend
-                                        </option>
-                                        <option value="backend">Backend</option>
-                                        <option value="fullstack">
-                                            Fullstack
-                                        </option>
-                                    </select>
-                                    Total Positions:
-                                    <input
-                                        placeholder="Total Needed Interns"
-                                        name="total_positions"
-                                        required
+                </div>
+            </header>
+            <div className="join-reg-container">
+                <div className="join-reg">
+                    <form onSubmit={submitForm}>
+                        <h2>Create Internship Post</h2>
+                        <input
+                            type="text"
+                            placeholder="Enter Post Title"
+                            name="title"
+                            required
+                        />
+                        <select name="job_type" id="job_type" required>
+                            <option value="Frontend">Frontend</option>
+                            <option value="Backend">Backend</option>
+                            <option value="FullStack">FullStack</option>
+                            <option value="QA">QA</option>
+                            <option value="UI/UX">UI/UX</option>
+                            <option value="Project Manager">
+                                Project Manager
+                            </option>
+                        </select>
+                        <input
+                            type="text"
+                            placeholder="Total Needed Interns"
+                            name="total_positions"
+                            required
+                        />
+                        <input
+                            type="text"
+                            placeholder="City"
+                            name="city"
+                            required
+                        />
+                        <input
+                            type="text"
+                            placeholder="Education Qualification"
+                            name="education"
+                            required
+                        />
+                        <input
+                            type="text"
+                            placeholder="Skills Required"
+                            name="skills"
+                            required
+                        />
+                        Apply Before:{" "}
+                        <input
+                            type="date"
+                            placeholder="Apply Before"
+                            name="apply_before"
+                            min={disablePastDate()}
+                            required
+                        />
+                        <input type="submit" name="submit" value="Post" />
+                    </form>
+                </div>
+            </div>
+            <center>
+                {" "}
+                <h1>Job Posts</h1>
+            </center>
+            <div className="profile-container">
+                <div className="profile">
+                    {user.post101 &&
+                        user.post101.map((post) => (
+                            <div className="profile-table" key={post.id}>
+                                <h2 className="profile-name"> {post.title}</h2>
+                                <h2 className="profile-name">
+                                    <ReactTimeAgo
+                                        date={post.created_at.toDate()}
+                                        locale="en-US"
                                     />
+                                </h2>
+
+                                <div className="row">
+                                    <div className="th">Location</div>
+                                    <div className="td">{post.city}</div>
+                                </div>
+                                <div className="row">
+                                    <div className="th">Job Type</div>
+                                    <div className="td">{post.job_type}</div>
+                                </div>
+                                <div className="row">
+                                    <div className="th">Total Positions</div>
+                                    <div className="td">
+                                        {post.total_positions}
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="th"> Qualification</div>
+                                    <div className="td">{post.education}</div>
                                 </div>
 
-                                <div>
-                                    <div>
-                                        City:{" "}
-                                        <input
-                                            placeholder="City"
-                                            name="city"
-                                            required
-                                        />
+                                <div className="row">
+                                    <div className="th">Skill Required</div>
+                                    <div className="td">{post.skills}</div>
+                                </div>
+                                <div className="row">
+                                    <div className="th">Apply Before</div>
+                                    <div className="td">
+                                        {post.apply_before}
                                     </div>
                                 </div>
-                                <div className="form-row form-group">
-                                    <div>
-                                        Education Qualification:{" "}
-                                        <input
-                                            placeholder="Education Qualification"
-                                            name="education"
-                                            required
-                                        />
-                                    </div>
-                                </div>
-                                <div>
-                                    <div>
-                                        Skills:{" "}
-                                        <input
-                                            placeholder="Skills Required"
-                                            name="skills"
-                                            required
-                                        />
-                                    </div>
-                                </div>
-                                <div>
-                                    <div>
-                                        Apply Before:{" "}
-                                        <input
-                                            type="date"
-                                            placeholder="Apply Before"
-                                            name="apply_before"
-                                            min={disablePastDate()}
-                                            required
-                                        />
-                                    </div>
-                                </div>
-                                <button type="submit">POST</button>
-                            </form>
-                        </div>
-                    </section>
-
-                    <section>
-                        <h1>My Job POST</h1>
-                        <div>
-                            {user.post101 &&
-                                user.post101.map((post) => (
-                                    <div className="" key={post.id}>
-                                        <h1>Title: {post.title}</h1>
-                                        <li>
-                                            Created :{" "}
-                                            <ReactTimeAgo
-                                                date={post.created_at.toDate()}
-                                                locale="en-US"
-                                            />
-                                        </li>
-                                        <li>City: {post.city}</li>
-                                        <li>Job type: {post.job_type}</li>
-                                        <li>
-                                            Total Positions:{" "}
-                                            {post.total_positions}
-                                        </li>
-                                        <li>
-                                            Education Qualification:{" "}
-                                            {post.education}
-                                        </li>
-                                        <li>
-                                            Experience Required:{" "}
-                                            {post.experience}
-                                        </li>
-                                        <li>Skill Required: {post.skills}</li>
-                                        <li>
-                                            Apply Before: {post.apply_before}
-                                        </li>
-
-                                        <button
-                                            onClick={() => deletePost(post)}
-                                        >
-                                            Delete Post
-                                        </button>
-                                    </div>
-                                ))}
-                        </div>
-                    </section>
-
-                    <footer className="page-footer">
-                        {/* <a href="https://georgemartsoukos.com/" target="_blank"></a> */}
-                    </footer>
-                </section>
-            </AuthIsLoaded>
+                                <br />
+                                <input
+                                    type="submit"
+                                    name="submit"
+                                    value="Delete"
+                                    onClick={() => deletePost(post)}
+                                />
+                            </div>
+                        ))}
+                </div>
+            </div>
+            <center>
+                {" "}
+                <h2>CV Collections</h2>
+            </center>
+            <CVrequest user={user} />
         </>
     );
 }

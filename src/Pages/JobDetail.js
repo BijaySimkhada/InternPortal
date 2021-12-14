@@ -11,6 +11,7 @@ import TimeAgo from "javascript-time-ago";
 import ReactTimeAgo from "react-time-ago";
 
 import en from "javascript-time-ago/locale/en.json";
+import Request from "./Request";
 
 TimeAgo.addDefaultLocale(en);
 
@@ -110,10 +111,10 @@ function UserDetail() {
                                                     {val.apply_before}
                                                 </h3>
 
-                                                <h3>
-                                                    Send your CV At: http://
-                                                    {users.email}
-                                                </h3>
+                                                <Request
+                                                    users={users}
+                                                    post={val}
+                                                />
                                             </div>
                                         ))}
                                 </div>

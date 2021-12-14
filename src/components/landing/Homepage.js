@@ -57,7 +57,7 @@ function Homepage() {
 
             <h1>Company registered:{count}</h1>
             <div className="container">
-                {data.slice(0, 3).map((users) => (
+                {data.map((users) => (
                     <div>
                         {users.post101
 

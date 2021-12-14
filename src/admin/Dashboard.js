@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router";
-import "./Dashboard.css";
+
 import { auth, db, logout } from "../firebase";
 import Userdashboard from "./Userdashboard";
 import Admindashboard from "./Admindashboard";
@@ -63,15 +63,7 @@ function Dashboard() {
                         </>
                     );
                 } else {
-                    return (
-                        <>
-                            <div className="dashboard">
-                                <div className="dashboard__container">
-                                    <div>Welcome to Dashboard.</div>
-                                </div>
-                            </div>
-                        </>
-                    );
+                    return <></>;
                 }
             })()}
         </>

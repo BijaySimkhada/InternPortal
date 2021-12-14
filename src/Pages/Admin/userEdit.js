@@ -74,49 +74,45 @@ function EditForm() {
         history.push("/dashboard");
     };
     return (
-        <div className="container">
-            <form onSubmit={submitForm}>
-                <div>
-                    <div>
-                        <input
-                            placeholder="Enter user Name"
-                            name="name"
-                            value={user.name}
-                            onChange={oninputChange}
-                        />
-                    </div>
-                    <div>
-                        <input
-                            placeholder="Enter user E-mail"
-                            name="email"
-                            value={user.email}
-                            onChange={oninputChange}
-                        />
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <input
-                            placeholder="Enter Location"
-                            name="location"
-                            value={user.location}
-                            onChange={oninputChange}
-                        />
-                    </div>
-                </div>
-                <div className="form-row form-group">
-                    <div>
-                        <input
-                            placeholder="Enter website"
-                            name="website"
-                            value={user.website}
-                            onChange={oninputChange}
-                        />
-                    </div>
-                </div>
+        <div className="join-reg-container">
+            <div className="join-reg">
+                <form onSubmit={submitForm}>
+                    <h3>Name:</h3>
+                    <input
+                        type="text"
+                        placeholder="Enter user Name"
+                        name="name"
+                        value={user.name}
+                        onChange={oninputChange}
+                    />
+                    <h3>Email</h3>
+                    <input
+                        type="text"
+                        placeholder="Enter user E-mail"
+                        name="email"
+                        value={user.email}
+                        onChange={oninputChange}
+                    />
+                    <h3>Location:</h3>
+                    <input
+                        type="text"
+                        placeholder="Enter Location"
+                        name="location"
+                        value={user.location}
+                        onChange={oninputChange}
+                    />
+                    <h3>Website:</h3>
+                    <input
+                        type="text"
+                        placeholder="Enter website"
+                        name="website"
+                        value={user.website}
+                        onChange={oninputChange}
+                    />
 
-                <button type="submit">{id ? "Update user" : "Add user"}</button>
-            </form>
+                    <input type="submit" name="submit" value="Update" />
+                </form>
+            </div>
         </div>
     );
 }
